@@ -17,6 +17,8 @@ services:
     volumes:
       - ../:/workspace/
       - /tmp/.X11-unix:/tmp/.X11-unix
+      # mount a docker volume to the container at /nerf-session and set the owner as 1000:1000
+      - nerf-sessions:/nerf-sessions  # this is the volume that will be mounted to the container
     working_dir: /workspace/
     command: /bin/bash
     deploy:
@@ -26,3 +28,8 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [ gpu ]
+
+#make the volume if it doesn't exist
+volumes:
+  nerf-sessions:
+    name: nerf-sessions
