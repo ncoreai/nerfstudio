@@ -1,1 +1,1 @@
-ns-train instant-ngp-bounded --output-dir /nerf-sessions/fly_by_out/nerf_output --pipeline.model.far-plane 1000 instant-ngp-data --data /nerf-sessions/fly_by_out --scene-scale 2.0
+ns-train instant-ngp-bounded --output-dir /nerf-sessions/hel_cam/nerf_output --pipeline.model.far-plane 10 nerfstudio-data --data /nerf-sessions/hel_cam
