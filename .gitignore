@@ -165,6 +165,7 @@ cython_debug/
 outputs/
 exports/
 renders/
+nerf_output/
 # tensorboard log files
 events.out.*
 
@@ -188,3 +189,4 @@ camera_paths/
 */**/.DS_Store
 */**/._.DS_Store
 
+nerf_output/nerf_output/instant-ngp-bounded/2023-09-13_152007/config.yml
