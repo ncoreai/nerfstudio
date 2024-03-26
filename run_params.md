@@ -75,3 +75,10 @@ ns-render \
 --output-path renders/dataset_flyby_4k_train/compare_flyby_4.mp4
 ```
 [flyby_compare_out]: renders/dataset_flyby_4k_train/compare_flyby_3.mp4
+
+
+--pipeline.model.sdf-field.features-per-level INT  
+--pipeline.model.sdf-field.log2-hashmap-size INT  
+ns-train neus-facto --vis viewer+tensorboard --optimizers.fields.optimizer.lr 5e-5 --pipeline.model.eikonal-loss-mult 0.01 --optimizers.proposal-networks.optimizer.lr 0.0025 --pipeline.model.sdf-field.use-grid-feature True --pipeline.model.sdf-field.base-res 64 --pipeline.model.enable-collider True --pipeline.model.sdf-field.features-per-level 8 --pipeline.model.sdf-field.log2-hashmap-size 21 --pipeline.model.loss-coefficients.rgb-loss-coarse 2.0 --pipeline.model.loss-coefficients.rgb-loss-fine 2.0 --pipeline.model.background-model none --pipeline.model.sdf-field.bias 0.5 --pipeline.model.far-plane-bg 10.0 --pipeline.model.sdf-field.inside-outside False --pipeline.model.background-color black neus-data --data /nerf-sessions/nerf_data/ --train-split-fraction 0.9999  --auto-scale-poses True --scene_scale 1.0
+
+ns-train neus-facto --vis viewer+tensorboard  --max-num-iterations 100001 --pipeline.model.num-proposal-iterations 3  --optimizers.proposal-networks.scheduler.milestones 15000 30000 50000 --optimizers.proposal-networks.scheduler.max-steps 100001 --pipeline.model.sdf-field.use-grid-feature True --pipeline.model.sdf-field.base-res 64 --pipeline.model.enable-collider True --pipeline.model.sdf-field.features-per-level 8 --pipeline.model.sdf-field.log2-hashmap-size 21 --pipeline.model.background-model none --pipeline.model.sdf-field.bias 0.5 --pipeline.model.far-plane-bg 10.0 --pipeline.model.sdf-field.inside-outside False --pipeline.model.background-color black neus-data --data /nerf-sessions/nerf_data/ --train-split-fraction 0.9999  --auto-scale-poses True --scene_scale 1.0
