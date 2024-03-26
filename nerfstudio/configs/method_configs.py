@@ -591,6 +591,7 @@ method_configs["neus-facto"] = TrainerConfig(
     vis="viewer",
 )
 
+
 method_configs["splatfacto"] = TrainerConfig(
     method_name="splatfacto",
     steps_per_eval_image=100,
