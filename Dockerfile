@@ -125,7 +125,7 @@ SHELL ["/bin/bash", "-c"]
 RUN python3.10 -m pip install --no-cache-dir --upgrade pip setuptools pathtools promise pybind11
 # Install pytorch and submodules
 RUN CUDA_VER=${CUDA_VERSION%.*} && CUDA_VER=${CUDA_VER//./} && python3.10 -m pip install --no-cache-dir \
-    torch==2.1.2+cu${CUDA_VER} \
+    torch==2.0.1+cu${CUDA_VER} \
     torchvision==0.15.2+cu${CUDA_VER} \
         --extra-index-url https://download.pytorch.org/whl/cu${CUDA_VER}
 # Install tynyCUDNN (we need to set the target architectures as environment variable first).
