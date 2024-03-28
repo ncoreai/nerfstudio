@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG CMakeFiles/ImathHalfCTest.dir/half_c_main.c.o -o ../../bin/ImathHalfCTest 

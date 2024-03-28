@@ -1,0 +1,5 @@
+{
+    "name": "Install Nitf Generator",
+    "id": "install-nitf-generator",
+    "description": "Install nitf generator as well as pynitf and openexr"
+}

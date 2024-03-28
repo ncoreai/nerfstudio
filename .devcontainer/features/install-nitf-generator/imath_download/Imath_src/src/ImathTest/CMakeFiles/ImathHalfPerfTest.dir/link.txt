@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/ImathHalfPerfTest.dir/half_perf_test.cpp.o -o ../../bin/ImathHalfPerfTest  -Wl,-rpath,/workspace/.devcontainer/features/install-nitf-generator/imath_download/Imath_src/src/Imath ../Imath/libImath-3_1.so.29.8.0 -lm 
