@@ -190,3 +190,5 @@ camera_paths/
 */**/._.DS_Store
 
 nerf_output/nerf_output/instant-ngp-bounded/2023-09-13_152007/config.yml
+scratch/
+rgba_test/

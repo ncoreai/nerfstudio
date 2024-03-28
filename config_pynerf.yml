@@ -46,7 +46,7 @@ optimizers:
     optimizer: !!python/object:nerfstudio.engine.optimizers.AdamOptimizerConfig
       _target: &id001 !!python/name:torch.optim.adam.Adam ''
       eps: 1.0e-15
-      lr: 0.02
+      lr: 0.05
       max_norm: null
       weight_decay: 1.0e-09
     scheduler: !!python/object:nerfstudio.engine.schedulers.CosineDecaySchedulerConfig
@@ -58,7 +58,7 @@ optimizers:
     optimizer: !!python/object:nerfstudio.engine.optimizers.AdamOptimizerConfig
       _target: *id001
       eps: 1.0e-15
-      lr: 0.02
+      lr: 0.05
       max_norm: null
       weight_decay: 1.0e-09
     scheduler: !!python/object:nerfstudio.engine.schedulers.CosineDecaySchedulerConfig
@@ -70,7 +70,7 @@ optimizers:
     optimizer: !!python/object:nerfstudio.engine.optimizers.AdamOptimizerConfig
       _target: *id001
       eps: 1.0e-15
-      lr: 0.01
+      lr: 0.05
       max_norm: null
       weight_decay: 0
     scheduler: !!python/object:nerfstudio.engine.schedulers.CosineDecaySchedulerConfig
@@ -110,7 +110,7 @@ pipeline: !!python/object:pynerf.data.pynerf_pipelines.PyNeRFPipelineConfig
       data: !!python/object/apply:pathlib.PosixPath
       - /
       - nerf-sessions
-      - nerf_data
+      - nerf_data_with_background
       depth_unit_scale_factor: 0.001
       downscale_factor: null
       eval_interval: 8
@@ -138,7 +138,7 @@ pipeline: !!python/object:pynerf.data.pynerf_pipelines.PyNeRFPipelineConfig
     collider_params:
       far_plane: 6.0
       near_plane: 0.1
-    disable_scene_contraction: true
+    disable_scene_contraction: false
     distortion_loss_mult: 0.002
     enable_collider: true
     eval_num_rays_per_chunk: 4096
@@ -162,7 +162,7 @@ pipeline: !!python/object:pynerf.data.pynerf_pipelines.PyNeRFPipelineConfig
     # PyNeRF Parameters
     ###############################
     ###---- Number of PyNerf Scales ----###
-    num_scales: 8
+    num_scales: 12
 
 
     ###---- This Directly affects GPU Memory Usage ----###
