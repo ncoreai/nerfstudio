@@ -1,0 +1,13 @@
+nvidia-smi
+uname
+bash
+du 
+python 
+sort
+nvim
+tmux
+nvtop
+htop
+sudo
+apt-get
+apt

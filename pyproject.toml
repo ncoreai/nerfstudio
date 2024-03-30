@@ -34,7 +34,7 @@ dependencies = [
     "msgpack_numpy>=0.4.8",
     "nerfacc==0.5.2",
     "open3d>=0.16.0",
-    "opencv-python==4.8.0.76",
+    "opencv-python-headless",
     "Pillow>=9.3.0",
     "plotly>=5.7.0",
     "protobuf<=3.20.3,!=3.20.0",
@@ -125,7 +125,7 @@ docs = [
 [project.scripts]
 # Note, add entrypoint name to nerfstudio/scripts/completions/install.py to include CLI completion
 ns-install-cli = "nerfstudio.scripts.completions.install:entrypoint"
-ns-process-data = "nerfstudio.scripts.process_data:entrypoint"
+# ns-process-data = "nerfstudio.scripts.process_data:entrypoint"
 ns-download-data = "nerfstudio.scripts.downloads.download_data:entrypoint"
 ns-train = "nerfstudio.scripts.train:entrypoint"
 ns-viewer = "nerfstudio.scripts.viewer.run_viewer:entrypoint"
