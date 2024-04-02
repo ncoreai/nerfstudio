@@ -411,11 +411,13 @@ class Neus(DataParser):
             dataparser_scale=scale_factor,
             dataparser_transform=dataparser_transform_matrix,
             metadata={
+                # "normal_filenames": None,
                 "depth_filenames": depth_filenames if len(depth_filenames) > 0 else None,
-                "normal_filenames": None,
+                # test if we can use no normals, usiing the depth image as a normal image
+                "normal_filenames": depth_filenames if len(depth_filenames) > 0 else None,
                 "camera_to_worlds": None,
                 "transform": None,
-                "include_mono_prior": False,
+                "include_mono_prior": True,
                 "depth_unit_scale_factor": self.config.depth_unit_scale_factor,
                 "mask_color": self.config.mask_color,
                 **metadata,

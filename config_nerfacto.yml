@@ -62,7 +62,7 @@ optimizers:
       eps: 1.0e-15
       lr: 0.01
       max_norm: null
-      weight_decay: 1.0e-08
+      weight_decay: 0
     scheduler: !!python/object:nerfstudio.engine.schedulers.ExponentialDecaySchedulerConfig
       _target: *id002
       lr_final: 0.0001
@@ -76,7 +76,7 @@ optimizers:
       eps: 1.0e-15
       lr: 0.01
       max_norm: null
-      weight_decay: 1.0e-08
+      weight_decay: 0
     scheduler: !!python/object:nerfstudio.engine.schedulers.ExponentialDecaySchedulerConfig
       _target: *id002
       lr_final: 0.0001
@@ -143,7 +143,7 @@ pipeline: !!python/object:nerfstudio.pipelines.base_pipeline.VanillaPipelineConf
   model: !!python/object:nerfstudio.models.nerfacto.NerfactoModelConfig
     _target: !!python/name:nerfstudio.models.nerfacto.NerfactoModel ''
     appearance_embed_dim: 128
-    average_init_density: 0.01
+    average_init_density: 0.05
     background_color: black
     base_res: 16
     camera_optimizer: !!python/object:nerfstudio.cameras.camera_optimizers.CameraOptimizerConfig
@@ -208,9 +208,9 @@ pipeline: !!python/object:nerfstudio.pipelines.base_pipeline.VanillaPipelineConf
     ###############################
     # Appearance Embedding parameters
     ###############################
-    use_appearance_embedding: false
+    use_appearance_embedding: true
     use_average_appearance_embedding: false
-    use_gradient_scaling: false
+    use_gradient_scaling: true
     use_proposal_weight_anneal: true
     use_same_proposal_network: false
     use_single_jitter: true
@@ -223,7 +223,7 @@ relative_model_dir: !!python/object/apply:pathlib.PosixPath
 ################################
 save_only_latest_checkpoint: true
 steps_per_eval_all_images: 2500000000
-steps_per_eval_batch: 500
+steps_per_eval_batch: 5000
 steps_per_eval_image: 10000
 steps_per_save: 2000
 

@@ -17,7 +17,7 @@ SDFStudio dataset.
 """
 
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Literal
 
 import numpy as np
 import torch
@@ -47,19 +47,31 @@ class NeusDataset(InputDataset):
         # can be none if auto orient not enabled in dataparser
         self.transform = self.metadata["transform"]
         self.include_mono_prior = self.metadata["include_mono_prior"]
+        print(f"include_mono_prior: {self.include_mono_prior}")
+        self.depth_unit_scale_factor = self.metadata["depth_unit_scale_factor"]
+        
 
     def get_metadata(self, data: Dict) -> Dict:
         # TODO supports foreground_masks
         metadata = {}
         if self.include_mono_prior:
             depth_filepath = self.depth_filenames[data["image_idx"]]
+            
+            #normal_filepath = self.normal_filenames[data["image_idx"]]
+            # test to see if we can do the depth w/o the normal
             normal_filepath = self.normal_filenames[data["image_idx"]]
-            camtoworld = self.camera_to_worlds[data["image_idx"]]
+            #camtoworld = self.camera_to_worlds[data["image_idx"]]
+            # set camtoworld to 4x4 Identity rotation matrix 0,0,0 transtlation
+            camtoworld = torch.eye(4)
+            camtoworld[:3, :3] = torch.eye(3)
+            camtoworld[:3, 3] = torch.tensor([0.0, 0.0, 0.0])
 
             # Scale depth images to meter units and also by scaling applied to cameras
             depth_image, normal_image = self.get_depths_and_normals(
                 depth_filepath=depth_filepath, normal_filename=normal_filepath, camtoworld=camtoworld
             )
+            depth_image = depth_image * self.depth_unit_scale_factor * self._dataparser_outputs.dataparser_scale
+            
             metadata["depth"] = depth_image
             metadata["normal"] = normal_image
 
@@ -79,23 +91,28 @@ class NeusDataset(InputDataset):
 
         # load mono normal
         normal = np.load(normal_filename)
+        depth = depth* self.depth_unit_scale_factor * self._dataparser_outputs.dataparser_scale
+            
 
-        # transform normal to world coordinate system
-        normal = normal * 2.0 - 1.0  # omnidata output is normalized so we convert it back to normal here
-        normal = torch.from_numpy(normal).float()
+        # # transform normal to world coordinate system
+        # normal = normal * 2.0 - 1.0  # omnidata output is normalized so we convert it back to normal here
+        # normal = torch.from_numpy(normal).float()
 
-        rot = camtoworld[:3, :3]
+        # rot = camtoworld[:3, :3]
 
-        normal_map = normal.reshape(3, -1)
-        normal_map = torch.nn.functional.normalize(normal_map, p=2, dim=0)
+        # normal_map = normal.reshape(3, -1)
+        # normal_map = torch.nn.functional.normalize(normal_map, p=2, dim=0)
 
-        normal_map = rot @ normal_map
-        normal = normal_map.permute(1, 0).reshape(*normal.shape[1:], 3)
+        # normal_map = rot @ normal_map
+        # normal = normal_map.permute(1, 0).reshape(*normal.shape[1:], 3)
 
-        if self.transform is not None:
-            h, w, _ = normal.shape
-            normal = self.transform[:3, :3] @ normal.reshape(-1, 3).permute(1, 0)
-            normal = normal.permute(1, 0).reshape(h, w, 3)
+        # if self.transform is not None:
+        #     h, w, _ = normal.shape
+        #     normal = self.transform[:3, :3] @ normal.reshape(-1, 3).permute(1, 0)
+        #     normal = normal.permute(1, 0).reshape(h, w, 3)
+            
+        # print the minumum and maximum values of the depth map
+        print(f"depth min: {depth.min()}, depth max: {depth.max()}")
 
         return depth, normal
 
