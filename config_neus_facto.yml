@@ -126,14 +126,14 @@ pipeline: !!python/object:nerfstudio.pipelines.base_pipeline.VanillaPipelineConf
       is_equirectangular: false
       keep_full_image: false
       max_num_iterations: 10000
-      num_rays_per_batch: 4096
+      num_rays_per_batch: 8192
       rejection_sample_mask: true
     train_num_images_to_sample_from: -1
-    train_num_rays_per_batch: 2048
+    train_num_rays_per_batch: 4096
     train_num_times_to_repeat_images: -1
   model: !!python/object:nerfstudio.models.neus_facto.NeuSFactoModelConfig
     _target: !!python/name:nerfstudio.models.neus_facto.NeuSFactoModel ''
-    background_color: black
+    background_color: white
     background_model: mlp
     base_variance: 64
     collider_params:
@@ -143,7 +143,7 @@ pipeline: !!python/object:nerfstudio.pipelines.base_pipeline.VanillaPipelineConf
     enable_collider: true
     eval_num_rays_per_chunk: 2048
     far_plane: 1
-    far_plane_bg: 200
+    far_plane_bg: 1000
     fg_mask_loss_mult: 0.01
     interlevel_loss_mult: 1.0
     loss_coefficients:
@@ -152,7 +152,7 @@ pipeline: !!python/object:nerfstudio.pipelines.base_pipeline.VanillaPipelineConf
     mono_depth_loss_mult: 1.0e-15
     mono_normal_loss_mult: 0.0
     near_plane: 0.5
-    num_neus_samples_per_ray: 48
+    num_neus_samples_per_ray: 96
     num_proposal_iterations: 2
     num_proposal_samples_per_ray: !!python/tuple
     - 256
