@@ -44,7 +44,7 @@ def process_adop(scene_path: Path, checkpoint_path: Path, scales: List[int]) -> 
     with (scene_path / 'adop-poses.txt').open('w') as f:
         for pose in tqdm(adop_poses):
             position = pose[4:7]
-            distance = (adop_points.t_position[:, :3] - position).norm(dim=-1)
+            distance = (adop_points.t_position[:, :3] - position).norm(dim=-1)  
             near = distance.min().item()
             far = distance.max().item()
             min_near = min(near, min_near)

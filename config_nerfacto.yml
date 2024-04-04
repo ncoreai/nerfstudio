@@ -35,7 +35,7 @@ machine: !!python/object:nerfstudio.configs.base_config.MachineConfig
   device_type: cuda
   dist_url: auto
   machine_rank: 0
-  num_devices: 1
+  num_devices: 2
   num_machines: 1
   seed: 42
 max_num_iterations: 300000

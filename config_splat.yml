@@ -35,7 +35,7 @@ machine: !!python/object:nerfstudio.configs.base_config.MachineConfig
   device_type: cuda
   dist_url: auto
   machine_rank: 0
-  num_devices: 1
+  num_devices: 2
   num_machines: 1
   seed: 42
 max_num_iterations: 30000
@@ -127,7 +127,7 @@ pipeline: !!python/object:nerfstudio.pipelines.base_pipeline.VanillaPipelineConf
       data: !!python/object/apply:pathlib.PosixPath
       - /
       - nerf-sessions
-      - nerf_data
+      - nerf_data_with_background
       depth_unit_scale_factor: 0.001
       downscale_factor: null
       eval_interval: 8
